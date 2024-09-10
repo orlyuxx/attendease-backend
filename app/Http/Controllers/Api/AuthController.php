@@ -18,9 +18,9 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
      
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if ( !$user || !Hash::check($request->password, $user->password) ) {
             throw ValidationException::withMessages([
-                'email' => ['The email or password are incorrect.'],
+                'email' => ['The email or password is incorrect.'],
             ]);
         }
 
@@ -35,9 +35,15 @@ class AuthController extends Controller
     /**
      * Logout using specified resource.
      */
-    public function logout()
+    public function logout(Request $request)
     {
-        return false;
+        $request->user()->tokens()->delete();
+        
+        $response = [
+            'message' => 'Logged Out Successfully'
+        ];
+
+        return $response;
     }
 
 }
