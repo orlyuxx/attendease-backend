@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\DepartmentsController;
 use App\Http\Controllers\Api\CarouselItemsController;
 
@@ -26,14 +27,6 @@ use App\Http\Controllers\Api\CarouselItemsController;
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
-
-    Route::controller(DepartmentsController::class)->group(function () {
-        Route::get('/department',               'index');
-        Route::get('/department/{id}',          'show');
-        Route::post('/department',              'store');
-        Route::put('/department/{id}',          'update');
-        Route::delete('/department/{id}',       'destroy');
-    });
     
     Route::controller(UserController::class)->group(function () {
         Route::get('/user',                     'index');
@@ -44,7 +37,25 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/user/{id}',             'destroy');
     });
 
+    Route::controller(DepartmentsController::class)->group(function () {
+        Route::get('/department',               'index');
+        Route::get('/department/{id}',          'show');
+        Route::post('/department',              'store');
+        Route::put('/department/{id}',          'update');
+        Route::delete('/department/{id}',       'destroy');
+    });
+    
 });
+
+    Route::controller(ShiftController::class)->group(function () {
+        Route::get('/shift',                    'index');
+        Route::get('/shift/{id}',               'show');
+        Route::post('/shift',                   'store');
+        Route::put('/shift/{id}',               'update');
+        Route::delete('/shift/{id}',            'destroy');
+    });
+    
+
 
 
 
