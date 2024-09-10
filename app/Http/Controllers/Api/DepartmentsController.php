@@ -35,7 +35,7 @@ class DepartmentsController extends Controller
      */
     public function show(string $id)
     {
-        return $carouselItem = Departments::findOrFail($id);
+        return $department = Departments::findOrFail($id);
     }
 
     /**
