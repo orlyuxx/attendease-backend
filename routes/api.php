@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\CarouselItemsController;
 */
 
     Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
+    Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
     Route::post('/user', [UserController::class, 'store'])->name('user.store');
 
 
@@ -27,7 +28,9 @@ use App\Http\Controllers\Api\CarouselItemsController;
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
-    
+
+});
+
     Route::controller(UserController::class)->group(function () {
         Route::get('/user',                     'index');
         Route::get('/user/{id}',                'show');
@@ -37,6 +40,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/user/{id}',             'destroy');
     });
 
+
     Route::controller(DepartmentsController::class)->group(function () {
         Route::get('/department',               'index');
         Route::get('/department/{id}',          'show');
@@ -44,8 +48,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/department/{id}',          'update');
         Route::delete('/department/{id}',       'destroy');
     });
-    
-});
 
     Route::controller(ShiftController::class)->group(function () {
         Route::get('/shift',                    'index');

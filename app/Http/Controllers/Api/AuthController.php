@@ -46,4 +46,29 @@ class AuthController extends Controller
         return $response;
     }
 
+    /**
+     * Login for admin
+     */
+    public function admin(UserRequest $request)
+    {
+        // Find the user by the provided email
+        $user = User::where('email', $request->email)->first();
+    
+        // Check if the user exists, the password is correct, and the user is the admin
+        if (!$user || !Hash::check($request->password, $user->password) || $user->email !== 'Admin@gmail.com') {
+            throw ValidationException::withMessages([
+                'email' => ['The email or password is incorrect, or you are not authorized to access this area.'],
+            ]);
+        }
+    
+        // Generate a response for the admin
+        $response = [
+            'user'  => $user,
+            'token' => $user->createToken($request->email)->plainTextToken,
+        ];
+    
+        return $response;
+    }
+    
+
 }

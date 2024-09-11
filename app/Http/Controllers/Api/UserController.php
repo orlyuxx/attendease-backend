@@ -100,4 +100,16 @@ class UserController extends Controller
 
         return $user;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function image(string $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $user->delete();
+
+        return $user;
+    }
 }
