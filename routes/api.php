@@ -20,9 +20,9 @@ use App\Http\Controllers\Api\CarouselItemsController;
 |
 */
 
-    Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
-    Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
-    Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
+Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
 
 
 
@@ -63,10 +63,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // User Specific APIs
     Route::get('/profile/show',             [ProfileController::class, 'show']);
     Route::put('/profile/image',            [ProfileController::class, 'image'])->name('profile.image');
-
-    
-
-
 
 });
 
