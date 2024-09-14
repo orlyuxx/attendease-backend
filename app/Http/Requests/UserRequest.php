@@ -35,9 +35,12 @@ class UserRequest extends FormRequest
         }
         else if( request()->routeIs('user.store') ) {
             return [
-                'name'          => 'required|string|max:255',
-                'email'         => 'required|string|email|max:255|unique:App\Models\User,email',
-                'password'      => 'required|min:8',
+                'name'              => 'required|string|max:255',
+                'email'             => 'required|string|email|max:255|unique:App\Models\User,email',
+                'password'          => 'required|min:8',
+                'gender'            => 'required',
+                'department_id'     => 'integer|required|exists:departments,department_id',
+                'shift_id'          => 'integer|required|exists:shifts,shift_id',
             ];
         }
         else if( request()->routeIs('user.update')) {

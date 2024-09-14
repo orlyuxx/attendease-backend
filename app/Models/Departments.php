@@ -16,7 +16,7 @@ class Departments extends Model
      */
     protected $table = 'departments';
 
-     /**
+    /**
      * The primary key associated with the table.
      *
      * @var string
