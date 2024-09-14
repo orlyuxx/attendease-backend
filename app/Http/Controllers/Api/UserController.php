@@ -60,7 +60,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the email of the specified resource in storage.
      */
     public function email(UserRequest $request, string $id)
     {
@@ -76,7 +76,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the password of the specified resource in storage.
      */
     public function password(UserRequest $request, string $id)
     {

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ShiftController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\DepartmentsController;
 use App\Http\Controllers\Api\CarouselItemsController;
 
@@ -29,9 +30,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
 
-});
 
-    Route::controller(UserController::class)->group(function () {
+
+    // Admin APIs
+        Route::controller(UserController::class)->group(function () {
         Route::get('/user',                     'index');
         Route::get('/user/{id}',                'show');
         Route::put('/user/{id}',                'update')->name('user.update');
@@ -40,7 +42,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/user/image/{id}',          'image')->name('user.image');
         Route::delete('/user/{id}',             'destroy');
     });
-
 
     Route::controller(DepartmentsController::class)->group(function () {
         Route::get('/department',               'index');
@@ -57,9 +58,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/shift/{id}',               'update');
         Route::delete('/shift/{id}',            'destroy');
     });
+
+
+    // User Specific APIs
+    Route::get('/profile/show',             [ProfileController::class, 'show']);
+    Route::put('/profile/image',            [ProfileController::class, 'image'])->name('profile.image');
+
     
 
 
+
+});
 
 
 // Route::controller(CarouselItemsController::class)->group(function () {
