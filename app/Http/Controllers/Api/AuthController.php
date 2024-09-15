@@ -33,20 +33,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout using specified resource.
-     */
-    public function logout(Request $request)
-    {
-        $request->user()->tokens()->delete();
-        
-        $response = [
-            'message' => 'Logged Out Successfully'
-        ];
-
-        return $response;
-    }
-
-    /**
      * Login for admin
      */
     public function admin(UserRequest $request)
@@ -67,6 +53,20 @@ class AuthController extends Controller
             'token' => $user->createToken($request->email)->plainTextToken,
         ];
     
+        return $response;
+    }
+
+    /**
+     * Logout using specified resource.
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        
+        $response = [
+            'message' => 'Logged Out Successfully'
+        ];
+
         return $response;
     }
     
