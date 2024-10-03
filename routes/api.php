@@ -22,13 +22,10 @@ use App\Http\Controllers\Api\CarouselItemsController;
 
 Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
 Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
-Route::post('/user', [UserController::class, 'store'])->name('user.store');
-
-
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
 
 
 
@@ -36,6 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::controller(UserController::class)->group(function () {
         Route::get('/user',                     'index');
         Route::get('/user/{id}',                'show');
+        Route::post('/user',                    'store')->name('user.store');
         Route::put('/user/{id}',                'update')->name('user.update');
         Route::put('/user/email/{id}',          'email')->name('user.email');
         Route::put('/user/password/{id}',       'password')->name('user.password');
