@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Departments;
 use Illuminate\Http\Request;
+use App\Models\AttendanceRecords;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DepartmentsRequest;
+use App\Http\Requests\AttendanceRecordsRequest;
 
-class DepartmentsController extends Controller
+class AttendanceRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Departments::all(); 
+        return AttendanceRecords::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DepartmentsRequest $request)
+    public function store(AttendanceRecordsRequest $request)
     {
         $validated = $request->validated();
 
-        $department = Departments::create($validated);
+        $attendance = AttendanceRecords::create($validated);
 
-        return $department;
+        return $attendance;
     }
 
     /**
@@ -34,21 +34,21 @@ class DepartmentsController extends Controller
      */
     public function show(string $id)
     {
-        return $department = Departments::findOrFail($id);
+        return $attendance = AttendanceRecords::findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(DepartmentsRequest $request, string $id)
+    public function update(AttendanceRecordsRequest $request, string $id)
     {
         $validated = $request->validated();
 
-        $department = Departments::findOrFail($id);
+        $attendance = AttendanceRecords::findOrFail($id);
 
-        $department->update($validated);
+        $attendance->update($validated);
 
-        return $department;
+        return $attendance;
     }
 
     /**
@@ -56,10 +56,6 @@ class DepartmentsController extends Controller
      */
     public function destroy(string $id)
     {
-        $department = Departments::findOrFail($id);
-        
-        $department->delete();
-
-        return $department;
+        //
     }
 }
