@@ -42,6 +42,35 @@ class UserController extends Controller
     {
         return $user = User::findOrFail($id);
     }
+    public function updateUserDetails(UserRequest $request, string $id)
+    {
+        $user = User::findOrFail($id);
+        $validated = $request->validated();
+
+        \Log::info('Received data:', $validated);
+
+        if (isset($validated['firstname'])) {
+            $user->firstname = $validated['firstname'];
+        }
+        
+        if (isset($validated['lastname'])) {
+            $user->lastname = $validated['lastname'];
+        }
+        
+        if (isset($validated['email'])) {
+            $user->email = $validated['email'];
+        }
+        
+        if (isset($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+        
+        $user->save();
+
+        $user->refresh();
+
+        return $user;
+    }
 
     /**
      * Update the specified resource in storage.
@@ -52,8 +81,9 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
-        $user->name = $validated['name'];
-
+        $user->firstname = $validated['firstname'];
+        $user->lastname = $validated['lastname'];
+        
         $user->save();
 
         return $user;

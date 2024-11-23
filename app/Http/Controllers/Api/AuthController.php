@@ -41,9 +41,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
     
         // Check if the user exists, the password is correct, and the user is the admin
-        if (!$user || !Hash::check($request->password, $user->password) || $user->email !== 'Admin@gmail.com') {
+        if (!$user || !Hash::check($request->password, $user->password) || $user->role !== 'admin') {
             throw ValidationException::withMessages([
-                'email' => ['The email or password is incorrect.'],
+                'admin' => ['The email or password is incorrect.'],
             ]);
         }
     

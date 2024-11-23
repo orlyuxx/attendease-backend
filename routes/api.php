@@ -24,7 +24,10 @@ use App\Models\AttendanceRecord;
 
 Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
 Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
+Route::post('/user',  [UserController::class, 'store'])->name('user.store');
 
+
+// PRIVATE APIs
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('user.logout');
@@ -32,9 +35,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Admin APIs
         Route::controller(UserController::class)->group(function () {
-        Route::get('/user',                     'index');
+        
+        Route::put('/updateUserDetails/{id}',                'updateUserDetails')->name('user.update.details');
         Route::get('/user/{id}',                'show');
-        Route::post('/user',                    'store')->name('user.store');
+        Route::get('/user',                     'index');
         Route::put('/user/{id}',                'update')->name('user.update');
         Route::put('/user/email/{id}',          'email')->name('user.email');
         Route::put('/user/password/{id}',       'password')->name('user.password');

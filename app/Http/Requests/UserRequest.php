@@ -40,13 +40,22 @@ class UserRequest extends FormRequest
                 'email'             => 'required|string|email|max:255|unique:App\Models\User,email',
                 'password'          => 'required|min:8|confirmed',
                 'gender'            => 'required',
-                'department_id'     => 'integer|required|exists:departments,department_id',
-                'shift_id'          => 'integer|required|exists:shifts,shift_id',
+                'department_id'     => 'integer|nullable|exists:departments,department_id',
+                'shift_id'          => 'integer|nullable|exists:shifts,shift_id',
+            ];
+        }                  
+        else if( request()->routeIs('user.update.details')) {
+            return [
+                'firstname' => 'sometimes|string|max:255',
+                'lastname' => 'sometimes|string|max:255',
+                'email' => 'sometimes|string|email|max:255|unique:users,email,' . $this->route('id') . ',user_id',
+                'password' => 'sometimes|nullable|min:8|confirmed',
             ];
         }
         else if( request()->routeIs('user.update')) {
             return [
-                'name'          => 'required|string|max:255'
+                'firstname' => ['required', 'string', 'max:255'],
+                'lastname' => ['required', 'string', 'max:255'],
             ];
         }
         else if( request()->routeIs('user.email')) {
