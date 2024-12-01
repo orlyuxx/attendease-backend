@@ -72,5 +72,7 @@ class UserRequest extends FormRequest
                 'image'      => 'required|image|mimes:jpg,bmp,png|max:2048'
             ];
         }
+
+        return [];
     }
 }

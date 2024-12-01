@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     /**
-     * Login using specified resource.
+     * Login for User
      */
     public function login(UserRequest $request)
     {
@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Login for admin
+     * Login for Admin
      */
     public function admin(UserRequest $request)
     {
