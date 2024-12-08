@@ -42,6 +42,7 @@ class UserController extends Controller
     {
         return $user = User::findOrFail($id);
     }
+    
     public function updateUserDetails(UserRequest $request, string $id)
     {
         $user = User::findOrFail($id);

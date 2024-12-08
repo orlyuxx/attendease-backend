@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\PassSlipsController;
+use App\Http\Controllers\Api\LeaveTypesController;
 use App\Http\Controllers\Api\DepartmentsController;
 use App\Http\Controllers\Api\CarouselItemsController;
 use App\Http\Controllers\Api\AttendanceRecordController;
@@ -47,11 +49,27 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/user/{id}',             'destroy');
     });
 
+    Route::controller(PassSlipsController::class)->group(function () {
+        Route::get('/passslip',               'index');
+        Route::get('/passslip/{id}',          'show');
+        Route::post('/passslip',              'store');
+        Route::put('/passslip/{id}',          'update');
+        Route::delete('/passslip/{id}',       'destroy');
+    });
+
     Route::controller(AttendanceRecordController::class)->group(function () {
         Route::get('/attendance',               'index');
         Route::post('/attendance',              'store')->name('attendance.store');
         Route::get('/attendance/{id}',          'show');
         Route::put('/attendance/{id}',          'update')->name('attendance.update');
+    });
+
+    Route::controller(LeaveTypesController::class)->group(function () {
+        Route::get('/leavetype',               'index');
+        Route::get('/leavetype/{id}',          'show');
+        Route::post('/leavetype',              'store');
+        Route::put('/leavetype/{id}',          'update');
+        Route::delete('/leavetype/{id}',       'destroy');
     });
 
     Route::controller(DepartmentsController::class)->group(function () {

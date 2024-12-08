@@ -41,7 +41,6 @@ class AttendanceRecordsRequest extends FormRequest
                 'break_in'         => 'nullable|date_format:H:i:s',
                 'break_out'        => 'nullable|date_format:H:i:s',
                 'time_out'         => 'nullable|date_format:H:i:s',
-                'status'           => 'nullable|string|max:255',
                 'break_in_status'  => 'nullable|string|max:255',
                 'break_out_status' => 'nullable|string|max:255',
                 'time_out_status'  => 'nullable|string|max:255',
