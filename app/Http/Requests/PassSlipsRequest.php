@@ -27,7 +27,7 @@ class PassSlipsRequest extends FormRequest
             'time_out' => 'required|date_format:Y-m-d H:i:s',
             'time_in' => 'nullable|date_format:Y-m-d H:i:s',
             'pass_slip_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image required
-            'status' => 'in:pending,approved,denied', // Allowed statuses
+            'status' => 'nullable|string',
         ];
     }
 }

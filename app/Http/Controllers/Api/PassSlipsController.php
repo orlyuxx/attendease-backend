@@ -29,6 +29,11 @@ class PassSlipsController extends Controller
         // Handle the image upload
         $imagePath = $request->file('pass_slip_image')->storePublicly('pass_slips', 'public');
 
+         // Set a default value for status if it's not provided
+        if (empty($validated['status'])) {
+            $validated['status'] = 'pending';  // Default status
+        }
+
         // Create the pass slip
         $passSlip = PassSlips::create([
             'user_id' => $validated['user_id'],

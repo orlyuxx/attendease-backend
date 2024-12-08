@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ShiftController;
+use App\Http\Controllers\Api\LeavesController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\PassSlipsController;
 use App\Http\Controllers\Api\LeaveTypesController;
@@ -47,6 +48,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/user/password/{id}',       'password')->name('user.password');
         Route::put('/user/image/{id}',          'image')->name('user.image');
         Route::delete('/user/{id}',             'destroy');
+    });
+
+    Route::controller(LeavesController::class)->group(function () {
+        Route::get('/leave',               'index');
+        Route::get('/leave/{id}',          'show');
+        Route::post('/leave',              'store');
+        Route::put('/leave/{id}',          'update');
+        Route::put('/leave/{id}/status',          'updateStatus');
+        Route::delete('/leave/{id}',       'destroy');
     });
 
     Route::controller(PassSlipsController::class)->group(function () {
