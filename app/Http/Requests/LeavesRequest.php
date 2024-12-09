@@ -29,7 +29,7 @@ class LeavesRequest extends FormRequest
             'reason'         => 'required|string|max:255',
             'number_of_days' => 'required|integer|min:1',
             'leave_type_id'  => 'required|exists:leave_types,leave_type_id',
-            'status' => 'required|in:pending,approved,rejected',
+            'status' => 'nullable|in:pending,approved,rejected',
         ];
     }
 }

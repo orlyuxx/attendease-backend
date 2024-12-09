@@ -116,4 +116,32 @@ class PassSlipsController extends Controller
 
         return $passSlip;
     }
+
+    public function approvePass(string $id)
+    {
+        // Find the leave record by ID
+        $pass = PassSlips::findOrFail($id);
+
+        // Update the status to approved
+        $pass->update(['status' => 'approved']);
+
+        return response()->json([
+            'message' => 'Pass Slip status updated to approved successfully!',
+            'leave'   => $pass->fresh(), // Ensure updated data is returned
+        ]);
+    }
+
+    public function rejectPass(string $id)
+    {
+        // Find the leave record by ID
+        $pass= PassSlips::findOrFail($id);
+
+        // Update the status to rejected
+        $pass->update(['status' => 'rejected']);
+
+        return response()->json([
+            'message' => 'Pass Slip status updated to rejected successfully!',
+            'leave'   => $pass->fresh(), // Ensure updated data is returned
+        ]);
+    }
 }

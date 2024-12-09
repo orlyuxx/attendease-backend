@@ -28,7 +28,6 @@ use App\Models\AttendanceRecord;
 Route::post('/login', [Authcontroller::class, 'login'])->name('user.login');
 Route::post('/admin', [Authcontroller::class, 'admin'])->name('admin.login');
 Route::post('/user',  [UserController::class, 'store'])->name('user.store');
-Route::get('/user',  [UserController::class, 'index']);
 
 
 // PRIVATE APIs
@@ -42,7 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         
         Route::put('/updateUserDetails/{id}',   'updateUserDetails')->name('user.update.details');
         Route::get('/user/{id}',                'show');
-        // Route::get('/user',                     'index');
+        Route::get('/user',                     'index');
         Route::put('/user/{id}',                'update')->name('user.update');
         Route::put('/user/email/{id}',          'email')->name('user.email');
         Route::put('/user/password/{id}',       'password')->name('user.password');
@@ -55,6 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/leave/{id}',          'show');
         Route::post('/leave',              'store');
         Route::put('/leave/{id}',          'update');
+        Route::put('/leave/approve/{id}',          'approveStatus');
+        Route::put('/leave/reject/{id}',          'rejectstatus');
         Route::put('/leave/{id}/status',          'updateStatus');
         Route::delete('/leave/{id}',       'destroy');
     });
@@ -64,6 +65,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/passslip/{id}',          'show');
         Route::post('/passslip',              'store');
         Route::put('/passslip/{id}',          'update');
+        Route::put('/passslip/approve/{id}',          'approvePass');
+        Route::put('/passslip/reject/{id}',          'rejectPass');
         Route::delete('/passslip/{id}',       'destroy');
     });
 

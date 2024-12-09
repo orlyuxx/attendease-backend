@@ -95,4 +95,32 @@ class LeavesController extends Controller
 
         return $leave;
     }
+
+    public function approveStatus(string $id)
+    {
+        // Find the leave record by ID
+        $leave = Leaves::findOrFail($id);
+
+        // Update the status to approved
+        $leave->update(['status' => 'approved']);
+
+        return response()->json([
+            'message' => 'Leave status updated to approved successfully!',
+            'leave'   => $leave->fresh(), // Ensure updated data is returned
+        ]);
+    }
+
+    public function rejectStatus(string $id)
+    {
+        // Find the leave record by ID
+        $leave = Leaves::findOrFail($id);
+
+        // Update the status to rejected
+        $leave->update(['status' => 'rejected']);
+
+        return response()->json([
+            'message' => 'Leave status updated to rejected successfully!',
+            'leave'   => $leave->fresh(), // Ensure updated data is returned
+        ]);
+    }
 }
