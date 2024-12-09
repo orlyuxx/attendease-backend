@@ -20,13 +20,7 @@ class LeavesRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        if ($this->isMethod('patch') || $this->isMethod('put')) {
-            return [
-                'status' => 'required|in:pending,approved,rejected',
-            ];
-        }
-    
+    {    
         // Default rules for other methods
         return [
             'user_id'        => 'required|exists:users,user_id',
@@ -35,6 +29,7 @@ class LeavesRequest extends FormRequest
             'reason'         => 'required|string|max:255',
             'number_of_days' => 'required|integer|min:1',
             'leave_type_id'  => 'required|exists:leave_types,leave_type_id',
+            'status' => 'required|in:pending,approved,rejected',
         ];
     }
 }

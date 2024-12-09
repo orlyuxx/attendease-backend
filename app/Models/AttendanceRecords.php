@@ -39,5 +39,6 @@ class AttendanceRecords extends Model
         'break_out_status',
         'time_out',
         'time_out_status',
+        'total_hours',
     ];
 }
